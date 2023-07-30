@@ -1,5 +1,5 @@
-import carrefourScraper from "./carrefour-scrapper.js";
+import farmacityScraper from "../farmacity-scrapper.js";
 
-carrefourScraper("yerba")
+farmacityScraper("serum")
   .then(products => console.log(products))
   .catch(error => console.error("Ocurrió un error:", error));

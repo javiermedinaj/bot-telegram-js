@@ -1,6 +1,7 @@
 import TelegramBot from "node-telegram-bot-api";
 import jumboScraper from "./jumbo-scrapper.js";
 import carrefourScraper from "./carrefour-scrapper.js";
+import farmacityScraper from "./farmacity-scrapper.js";
 
 import dotenv from 'dotenv'; 
 
@@ -61,6 +62,26 @@ function startTelegramBot() {
     } catch (error) {
       console.error("Error occurred while scraping Carrefour:", error);
       bot.sendMessage(chatId, `Lo siento, ocurrió un error al obtener los productos de Carrefour para '${productName}'.`);
+    }
+  });
+
+  bot.onText(/\/farmacity (.+)/, async (msg, match) => {
+    const chatId = msg.chat.id;
+    const productName = match[1];
+
+    try {
+      const products = await farmacityScraper(productName);
+      let message = `Estos son los 10 productos más baratos y mas vendidos que encontré para '${productName}' en Farmacity:\n`;
+
+      for (let i = 0; i < Math.min(10, products.length); i++) {
+        const item = products[i];
+        message += `Nombre: ${item.name}\nPrecio: ${item.price}\nEnlace: ${item.link}\n\n`;
+      }
+
+      bot.sendMessage(chatId, message);
+    } catch (error) {
+      console.error("Error occurred while scraping Farmacity:", error);
+      bot.sendMessage(chatId, `Lo siento, ocurrió un error al obtener los productos de Farmacity para '${productName}'.`);
     }
   });
 

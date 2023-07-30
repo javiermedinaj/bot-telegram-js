@@ -1,4 +1,4 @@
-import jumboScraper from "./jumbo-scrapper.js";
+import jumboScraper from "../jumbo-scrapper.js";
 
 jumboScraper("Producto a testear")
   .then(products => console.log(products))
