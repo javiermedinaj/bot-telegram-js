@@ -8,20 +8,13 @@ async function farmacityScraper(productName) {
     await page.setViewport({ width: 1600, height: 900 });
     await page.goto("https://www.farmacity.com.ar/");
 
-    // Escribir el nombre del producto en el campo de búsqueda
     await page.type('#ftBox8a1201ce111e42728c51807d06ecf7d4', productName);
-
-    // Presionar la tecla "Enter" para realizar la búsqueda
     await page.keyboard.press("Enter");
-
-    // Esperar un tiempo para asegurarnos de que se carguen los resultados de búsqueda
     await new Promise (resolve => setTimeout(resolve, 6000));
-
-    // Hacer clic en el botón de filtrado por precio más bajo
     await page.waitForSelector('.orderBy');
     await page.click('.orderBy');
 
-    await new Promise (resolve => setTimeout(resolve, 6000)); // Esperar un tiempo adicional para asegurarnos de que los resultados se carguen completamente
+    await new Promise (resolve => setTimeout(resolve, 6000));
 
     const productsData = await page.evaluate(() => {
       const productElements = document.querySelectorAll(".product-card-container");

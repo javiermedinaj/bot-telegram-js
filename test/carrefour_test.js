@@ -1,4 +1,4 @@
-import carrefourScraper from "../carrefour-scrapper.js";
+import carrefourScraper from "../carrefour-scraper.js";
 
 carrefourScraper("yerba")
   .then(products => console.log(products))

@@ -1,5 +1,5 @@
-import jumboScraper from "../jumbo-scraper.js";
+import finanzasargyScraper from '../scrapers/finanzy-scraper.js';
 
-jumboScraper("Producto a testear")
+finanzasargyScraper("dolar")
   .then(products => console.log(products))
   .catch(error => console.error("Ocurrió un error:", error));
